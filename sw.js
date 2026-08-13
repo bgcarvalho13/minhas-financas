@@ -1,4 +1,4 @@
-const CACHE = 'minhas-financas-v6';
+const CACHE = 'minhas-financas-v7';
 const APP_SHELL = [
   './', './index.html', './styles.css', './app.js', './db.js', './seed.js',
   './manifest.json', './assets/icon-192.png', './assets/icon-512.png'
