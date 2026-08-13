@@ -38,5 +38,12 @@ $('#exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],
 function renderAll(){renderHome();renderForecast();renderLaunch();renderCal();renderWallet();renderIndicators();renderFixed()}
 const now=new Date();const dateText=now.toLocaleDateString('pt-BR',{day:'numeric',month:'long'});$('#today').textContent=dateText.charAt(0).toUpperCase()+dateText.slice(1).replace(/ de ([a-záàâãéêíóôõúç])/u,(_,letter)=>' de '+letter.toUpperCase());renderAll();show('home');
 
+const params = new URLSearchParams(window.location.search);
+const telaInicial = params.get('tela');
+
+if (telaInicial === 'launch') {
+  show('launch');
+}
+
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(console.error)); }
 
