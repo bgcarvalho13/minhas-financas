@@ -51,3 +51,8 @@ A extração usa PDF.js carregado sob demanda. A conciliação compara data e va
 - `manifest.json`: metadados instaláveis
 - `sw.js`: cache offline
 - `assets/`: ícones
+
+## Atualização v3
+
+- Rotativos podem ser adicionados, editados e excluídos.
+- Receitas e despesas fixas usam a mesma taxonomia de categorias e itens dos lançamentos.
