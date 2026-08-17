@@ -15,5 +15,6 @@ export const seed = {
   },
   transactions: [],
   rotativos: [],
-  investments: []
+  investments: [],
+  planejamentos: []
 };

@@ -12,6 +12,14 @@ db.version(1).stores({
   settings: 'key'
 });
 
+db.version(2).stores({
+  transactions: 'id, data, tipo, recorrencia, categoria, origem, [data+valor]',
+  fixedIncome: 'id, item', fixedExpense: 'id, categoria, item', goals: 'grupo',
+  rotativos: 'id', investments: 'id, tipo', categories: 'key',
+  processedInvoices: 'hash', settings: 'key',
+  planejamentos: 'id, status, tipo, natureza, prioridade, certeza, dataInicio'
+});
+
 const clone = value => JSON.parse(JSON.stringify(value));
 
 export async function loadState(seed) {
@@ -22,16 +30,17 @@ export async function loadState(seed) {
     return clone(seed);
   }
 
-  const [transactions, fixedIncome, fixedExpense, goalRows, rotativos, investments, categoryRows, invoiceRows, configRow] = await Promise.all([
+  const [transactions, fixedIncome, fixedExpense, goalRows, rotativos, investments, categoryRows, invoiceRows, configRow, planejamentos] = await Promise.all([
     db.transactions.toArray(), db.fixedIncome.toArray(), db.fixedExpense.toArray(), db.goals.toArray(),
     db.rotativos.toArray(), db.investments.toArray(), db.categories.toArray(),
-    db.processedInvoices.toArray(), db.settings.get('config')
+    db.processedInvoices.toArray(), db.settings.get('config'), db.planejamentos.toArray()
   ]);
 
   const state = clone(seed);
   state.transactions = transactions;
   state.rotativos = rotativos;
   state.investments = investments;
+  state.planejamentos = planejamentos;
   state.goals = Object.fromEntries(goalRows.map(x => [x.grupo, x.pct]));
   state.config = { ...state.config, ...(configRow?.value || {}) };
   state.config.receitasFixas = fixedIncome;
@@ -58,6 +67,7 @@ async function persistState(state) {
     await db.goals.bulkPut(Object.entries(state.goals || {}).map(([grupo, pct]) => ({ grupo, pct })));
     await db.rotativos.bulkPut(clone(state.rotativos || []));
     await db.investments.bulkPut(clone(state.investments || []));
+    await db.planejamentos.bulkPut(clone(state.planejamentos || []));
     await db.categories.bulkPut(Object.entries(state.config?.customTaxonomy || {}).map(([key, value]) => ({ key, value })));
     await db.processedInvoices.bulkPut((state.config?.faturasProcessadas || []).map(hash => ({ hash })));
     await db.settings.put({ key: 'config', value: config });
