@@ -1,4 +1,4 @@
-const db = new Dexie('MinhasFinancasDB');
+const db = new Dexie('MinhasFinancasDB_v11');
 
 db.version(1).stores({
   transactions: 'id, data, tipo, recorrencia, categoria, origem, [data+valor]',
@@ -41,7 +41,9 @@ export async function loadState(seed) {
   return state;
 }
 
-export async function saveState(state) {
+let writeQueue = Promise.resolve();
+
+async function persistState(state) {
   const config = clone(state.config || {});
   delete config.receitasFixas;
   delete config.despesasFixas;
@@ -61,6 +63,12 @@ export async function saveState(state) {
     await db.settings.put({ key: 'config', value: config });
     await db.settings.put({ key: 'initialized', value: true });
   });
+}
+
+export function saveState(state) {
+  const snapshot = clone(state);
+  writeQueue = writeQueue.then(() => persistState(snapshot));
+  return writeQueue;
 }
 
 export async function resetDatabase(seed) {

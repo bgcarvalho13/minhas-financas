@@ -1,9 +1,19 @@
-export const seed = {config:{income:5607,fixed:3237,rotPayment:420,receitasFixas:[{id:101,item:'Salário',valor:5087},{id:102,item:'Vale-alimentação',valor:520}],customTaxonomy:{},faturasProcessadas:[],despesasFixas:[{id:201,categoria:'Moradia',item:'Aluguel',valor:1200},{id:202,categoria:'Moradia',item:'Internet e condomínio',valor:680},{id:203,categoria:'Trabalho e educação',item:'Pós-graduação e assinaturas',valor:837},{id:204,categoria:'Saúde',item:'Saúde e academia',valor:520}]},goals:{Mercado:25,'Comer fora':20,Lazer:15,Transporte:10,Compras:10,Casa:10,Saúde:5,Viagem:5},transactions:[
-{id:1,tipo:'receita',recorrencia:'fixa',categoria:'Receitas',item:'Salário',valor:5087,data:'2026-08-01',descricao:'Salário',origem:'manual'},
-{id:2,tipo:'receita',recorrencia:'fixa',categoria:'Receitas',item:'Vale-alimentação',valor:520,data:'2026-08-01',descricao:'Vale-alimentação',origem:'manual'},
-{id:3,tipo:'despesa',recorrencia:'fixa',categoria:'Moradia',item:'Aluguel',valor:1200,data:'2026-08-01',descricao:'Aluguel',origem:'manual'},
-{id:4,tipo:'despesa',recorrencia:'variavel',categoria:'Mercado',item:'Supermercado',valor:211.72,data:'2026-08-04',descricao:'Supermercado e padaria',origem:'cartao'},
-{id:5,tipo:'despesa',recorrencia:'variavel',categoria:'Transporte',item:'Aplicativo',valor:24.59,data:'2026-08-07',descricao:'Uber',origem:'cartao'},
-{id:6,tipo:'despesa',recorrencia:'variavel',categoria:'Comer fora',item:'Restaurante (almoço)',valor:54.60,data:'2026-08-09',descricao:'Mania Gostosa',origem:'cartao'},
-{id:7,tipo:'despesa',recorrencia:'variavel',categoria:'Lazer',item:'Bar',valor:70,data:'2026-08-11',descricao:'Bar do Chico',origem:'cartao'},
-{id:8,tipo:'despesa',recorrencia:'variavel',categoria:'Compras',item:'Eletrônicos',valor:108.16,data:'2026-08-13',descricao:'Amazon Marketplace',origem:'cartao'}],rotativos:[{id:1,descricao:'Fatura Nubank',total:3000,custo:620,quitacao:'dez/2026'},{id:2,descricao:'Cartão Itaú',total:1200,custo:210,quitacao:'nov/2026'}],investments:[{id:1,nome:'Tesouro Selic 2029',tipo:'Tesouro Direto',total:4200},{id:2,nome:'CDB 110% CDI',tipo:'CDB / LCI / LCA',total:3000},{id:3,nome:'Previdência PGBL',tipo:'Previdência privada',total:2500}]};
+export const seed = {
+  config: {
+    income: 0,
+    fixed: 0,
+    rotPayment: 0,
+    receitasFixas: [],
+    despesasFixas: [],
+    customTaxonomy: {},
+    hiddenTaxonomy: {},
+    faturasProcessadas: []
+  },
+  goals: {
+    Mercado: 0, 'Comer fora': 0, Lazer: 0, Transporte: 0,
+    Compras: 0, Casa: 0, Saúde: 0, Viagem: 0
+  },
+  transactions: [],
+  rotativos: [],
+  investments: []
+};
